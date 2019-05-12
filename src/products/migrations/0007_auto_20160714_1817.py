@@ -44,6 +44,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='default',
-            field=models.ForeignKey(related_name='default_category', blank=True, to='products.Category', null=True),
+            field=models.ForeignKey(on_delete=models.CASCADE, related_name='default_category', blank=True, to='products.Category', null=True),
         ),
     ]

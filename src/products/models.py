@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class ProductManager(models.Manager):
@@ -19,7 +19,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField()
     active = models.BooleanField(default=True)
     categories = models.ManyToManyField('Category', blank=True)
-    default = models.ForeignKey('Category', related_name='default_category', null=True, blank=True)
+    default = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='default_category', null=True, blank=True)
     # slug
     objects = ProductManager()
 
@@ -42,7 +42,7 @@ class Product(models.Model):
 
 
 class Variation(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.PositiveIntegerField()
     sale_price = models.PositiveIntegerField(null=True, blank=True)
@@ -72,7 +72,7 @@ class Variation(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products/', null=True)
 
     def __unicode__(self):
@@ -93,7 +93,7 @@ class Category(models.Model):
 
 
 class ProductFeatured(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products/featured/')
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=400, blank=True, null=True)

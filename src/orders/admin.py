@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-import models
+from orders import models
 
 admin.site.register(models.UserCheckout)
 admin.site.register(models.UserAddress)

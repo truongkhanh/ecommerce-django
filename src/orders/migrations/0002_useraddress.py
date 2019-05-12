@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('address', models.CharField(max_length=300)),
                 ('state', models.CharField(max_length=100)),
                 ('zipcode', models.PositiveIntegerField()),
-                ('user', models.ForeignKey(to='orders.UserCheckout')),
+                ('user', models.ForeignKey(to='orders.UserCheckout', on_delete=models.CASCADE)),
             ],
         ),
     ]

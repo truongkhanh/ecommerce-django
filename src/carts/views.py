@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.edit import FormMixin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -59,7 +59,7 @@ class CartCreateView(TemplateView, APIView):
               'cart_price': cart.cart_price,
               'cart_count': cart_count}, status=status.HTTP_200_OK)
         except Exception as error:
-            print error
+            print(error)
 
 
 class CartDetailView(TemplateView):

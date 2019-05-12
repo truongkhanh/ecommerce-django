@@ -7,8 +7,8 @@ from products import models as product_models
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey("Cart")
-    item = models.ForeignKey(product_models.Variation)
+    cart = models.ForeignKey("Cart", on_delete=models.CASCADE)
+    item = models.ForeignKey(product_models.Variation, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     def __unicode__(self):
@@ -27,7 +27,7 @@ class CartItem(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     items = models.ManyToManyField(product_models.Variation, through=CartItem)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)

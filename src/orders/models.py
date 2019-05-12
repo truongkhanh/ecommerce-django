@@ -5,7 +5,7 @@ from carts.models import Cart
 
 
 class UserCheckout(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, blank=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField('email of guest user', null=True, blank=True)
 
     def __unicode__(self):
@@ -24,7 +24,7 @@ class UserAddress(models.Model):
         (BILLING, 'Billing'),
         (SHIPPING, 'Shipping')
         )
-    user = models.ForeignKey(UserCheckout)
+    user = models.ForeignKey(UserCheckout, on_delete=models.CASCADE)
     type = models.CharField(max_length=100, choices=ADDRESS_TYPES)
     address = models.CharField(max_length=300)
     state =  models.CharField(max_length=100)
@@ -38,10 +38,10 @@ class UserAddress(models.Model):
 
 
 class Order(models.Model):
-    cart = models.ForeignKey(Cart)
-    user = models.ForeignKey(UserCheckout)
-    billing_address = models.ForeignKey(UserAddress, related_name='billing_address')
-    shipping_address = models.ForeignKey(UserAddress, related_name='shipping_address')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserCheckout, on_delete=models.CASCADE)
+    billing_address = models.ForeignKey(UserAddress, on_delete=models.CASCADE, related_name='billing_address')
+    shipping_address = models.ForeignKey(UserAddress, on_delete=models.CASCADE, related_name='shipping_address')
     shipping_price = models.PositiveIntegerField(default=0)
     order_total = models.PositiveIntegerField()
     is_completed = models.BooleanField(default=True)

@@ -3,7 +3,8 @@ from django.views.generic import View
 from django.views.generic.list import ListView
 from django.contrib import messages
 from django.views.generic.edit import FormView, CreateView
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 
 from .forms import AddressForm, UserAddressForm
 from .models import UserAddress, UserCheckout, Order

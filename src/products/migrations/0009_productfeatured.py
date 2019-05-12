@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('description_right', models.BooleanField(default=False)),
                 ('show_price', models.BooleanField(default=False)),
                 ('active', models.BooleanField(default=True)),
-                ('product', models.ForeignKey(to='products.Product')),
+                ('product', models.ForeignKey(to='products.Product', on_delete=models.CASCADE)),
             ],
         ),
     ]

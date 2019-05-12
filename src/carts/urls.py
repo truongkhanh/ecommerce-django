@@ -1,7 +1,6 @@
 from django.conf.urls import url
-
-import views
 from orders.views import AddressFormView, UserAddressCreateView, ConfirmOrderView, OrdersList
+from carts import views
 
 urlpatterns = [
     url(r'^$', views.CartCreateView.as_view(), name='create_cart'),
